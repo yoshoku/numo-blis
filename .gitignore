@@ -7,6 +7,13 @@
 /spec/reports/
 /tmp/
 
+/vendor/lib/
+/vendor/include/
+/vendor/share/
+/vendor/installed_*
+/vendor/tmp/blis*
+/vendor/tmp/lapack*
+
 # rspec failure tracking
 .rspec_status
 
