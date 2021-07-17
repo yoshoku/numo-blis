@@ -1,8 +1,7 @@
 # Numo::BLIS
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/numo/blis`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Numo::BLIS downloads and builds [BLIS](https://github.com/flame/blis) during installation and
+uses that as a background library for [Numo::Linalg](https://github.com/ruby-numo/numo-linalg).
 
 ## Installation
 
