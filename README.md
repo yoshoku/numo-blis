@@ -5,6 +5,16 @@ uses that as a background library for [Numo::Linalg](https://github.com/ruby-num
 
 ## Installation
 
+Building LAPACK with BLIS requires cmake and Fortran compiler.
+
+macOS:
+
+    $ brew install gcc gfortran cmake
+
+Ubuntu:
+
+    $ sudo apt-get install gcc gfortran cmake
+
 Add this line to your application's Gemfile:
 
 ```ruby
