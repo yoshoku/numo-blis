@@ -6,10 +6,13 @@ require_relative 'blis/version'
 require_relative 'blis/blisext'
 
 module Numo
+  # @!visibility private
   module Linalg
+    # @!visibility private
     module Loader
       module_function
 
+      # @!visibility private
       def load_blis(*dirs, exc: true)
         dirs.each do |d|
           begin
