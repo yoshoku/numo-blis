@@ -9,3 +9,9 @@
 
 # rspec failure tracking
 .rspec_status
+
+*.bundle
+.ruby-version
+
+*.swp
+.DS_Store
