@@ -1,5 +1,9 @@
 # Numo::BLIS
 
+[![Build Status](https://github.com/yoshoku/numo-blis/actions/workflows/build.yml/badge.svg)](https://github.com/yoshoku/numo-blis/actions/workflows/build.yml)
+[![Gem Version](https://badge.fury.io/rb/numo-blis.svg)](https://badge.fury.io/rb/numo-blis)
+[![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://github.com/yoshoku/numo-blis/blob/main/LICENSE.txt)
+
 Numo::BLIS downloads and builds [BLIS](https://github.com/flame/blis) during installation and
 uses that as a background library for [Numo::Linalg](https://github.com/ruby-numo/numo-linalg).
 
