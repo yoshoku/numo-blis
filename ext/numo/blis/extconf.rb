@@ -26,6 +26,10 @@ BLIS_TGZ = "#{VENDOR_DIR}/tmp/blis-#{BLIS_VERSION}.tgz"
 LAPACK_TGZ = "#{VENDOR_DIR}/tmp/lapack-#{LAPACK_VERSION}.tgz"
 BLIS_KEY = 'ce5998fccfac88153f1e52d6497020529a3b5217'
 LAPACK_KEY = '4a9384523bf236c83568884e8c62d9517e41ac42'
+BLIS_CONFIGURE_OPTIONS = ['--enable-cblas',
+                          '--enable-threading=pthreads',
+                          "--prefix=#{VENDOR_DIR}",
+                          'auto'].join(' ')
 LAPACK_CMAKE_OPTIONS = ["-DBLAS_LIBRARIES='#{VENDOR_DIR}/lib/libblis.#{SOEXT}'",
                         '-DLAPACKE=ON',
                         '-DBUILD_SHARED_LIBS=ON',
@@ -52,7 +56,7 @@ unless File.exist?("#{VENDOR_DIR}/installed_blis-#{BLIS_VERSION}")
 
   Dir.chdir("#{VENDOR_DIR}/tmp/blis-#{BLIS_VERSION}") do
     puts 'Configuring BLIS.'
-    cfgstdout, _cfgstderr, cfgstatus = Open3.capture3("./configure --enable-cblas --prefix=#{VENDOR_DIR} auto")
+    cfgstdout, _cfgstderr, cfgstatus = Open3.capture3("./configure #{BLIS_CONFIGURE_OPTIONS}")
     File.open("#{VENDOR_DIR}/tmp/blis.log", 'w') { |f| f.puts(cfgstdout) }
     abort('Failed to config BLIS.') unless cfgstatus.success?
 
@@ -111,6 +115,5 @@ unless File.exist?("#{VENDOR_DIR}/installed_lapack-#{LAPACK_VERSION}")
 end
 
 abort('libblis is not found.') unless find_library('blis', nil, "#{VENDOR_DIR}/lib")
-abort('liblapack is not found.') unless find_library('lapack', nil, "#{VENDOR_DIR}/lib")
 
 create_makefile('numo/blis/blisext')
