@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'etc'
 require 'numo/linalg/linalg'
 
 require_relative 'blis/version'
@@ -29,5 +30,7 @@ module Numo
     end
   end
 end
+
+ENV['BLIS_NUM_THREADS'] ||= Etc.nprocessors.to_s
 
 Numo::Linalg::Loader.load_blis(File.expand_path("#{__dir__}/../../vendor/lib/"))
