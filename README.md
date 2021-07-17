@@ -31,7 +31,25 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Numo::BLIS loads Numo::NArray and Numo::Linalg using BLIS as a background library.
+You can use Numo::NArray and Numo::Linalg just by loading Numo::BLIS.
+
+```ruby
+require 'numo/blis'
+
+x = Numo::DFloat.new(5, 2).rand
+c = x.transpose.dot(x)
+eig_val, eig_vec = Numo::Linalg.eigh(c)
+```
+
+Moreover, the versions of background libraries are defined by constants.
+
+```ruby
+> Numo::BLIS::BLIS_VERSION
+=> "0.8.1"
+> Numo::BLIS::LAPACK_VERSION
+=> "3.10.0"
+```
 
 ## Contributing
 
