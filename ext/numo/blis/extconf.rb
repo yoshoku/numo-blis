@@ -43,6 +43,7 @@ BLIS_CONFIGURE_OPTIONS = ['--enable-cblas',
 LAPACK_CMAKE_OPTIONS = ["-DBLAS_LIBRARIES='#{VENDOR_DIR}/lib/libblis.#{SOEXT}'",
                         '-DLAPACKE=ON',
                         '-DBUILD_SHARED_LIBS=ON',
+                        '-DCMAKE_BUILD_TYPE=Release',
                         "-DCMAKE_INSTALL_PREFIX='#{VENDOR_DIR}'"].join(' ')
 
 unless File.exist?("#{VENDOR_DIR}/installed_blis-#{BLIS_VERSION}")
