@@ -1,4 +1,3 @@
-# frozen-string-literal: true
 
 require 'etc'
 require 'fileutils'
@@ -26,9 +25,20 @@ BLIS_TGZ = "#{VENDOR_DIR}/tmp/blis-#{BLIS_VERSION}.tgz"
 LAPACK_TGZ = "#{VENDOR_DIR}/tmp/lapack-#{LAPACK_VERSION}.tgz"
 BLIS_KEY = 'ce5998fccfac88153f1e52d6497020529a3b5217'
 LAPACK_KEY = '4a9384523bf236c83568884e8c62d9517e41ac42'
+RB_CC = "'#{RbConfig::expand('$(CC)')}'"
+RB_CXX = "'#{RbConfig::expand('$(CPP)')}'"
+BLIS_THREADING = if try_compile('#include <omp.h>')
+                   'openmp'
+                 elsif try_complie('#include <pthread.h>')
+                   'pthreads'
+                 else
+                   'no'
+                 end
 BLIS_CONFIGURE_OPTIONS = ['--enable-cblas',
-                          '--enable-threading=pthreads',
+                          "--enable-threading=#{BLIS_THREADING}",
                           "--prefix=#{VENDOR_DIR}",
+                          "CC=#{RB_CC}",
+                          "CXX=#{RB_CXX}",
                           'auto'].join(' ')
 LAPACK_CMAKE_OPTIONS = ["-DBLAS_LIBRARIES='#{VENDOR_DIR}/lib/libblis.#{SOEXT}'",
                         '-DLAPACKE=ON',
