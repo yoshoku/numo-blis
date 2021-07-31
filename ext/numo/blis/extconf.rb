@@ -7,6 +7,8 @@ require 'open3'
 require 'rbconfig'
 require 'rubygems/package'
 
+ENABLE_THREADING_ARG = arg_config('--enable-threading')
+
 VENDOR_DIR = File.expand_path("#{__dir__}/../../../vendor")
 SOEXT = RbConfig::CONFIG['SOEXT'] || case RUBY_PLATFORM
                                      when /mswin|msys|mingw|cygwin/
@@ -27,7 +29,10 @@ BLIS_KEY = 'ce5998fccfac88153f1e52d6497020529a3b5217'
 LAPACK_KEY = '4a9384523bf236c83568884e8c62d9517e41ac42'
 RB_CC = "'#{RbConfig::expand('$(CC)')}'"
 RB_CXX = "'#{RbConfig::expand('$(CPP)')}'"
-BLIS_THREADING = if try_compile('#include <omp.h>')
+
+BLIS_THREADING = if ['openmp', 'pthreads', 'no'].include?(ENABLE_THREADING_ARG)
+                   ENABLE_THREADING_ARG
+                 elsif try_compile('#include <omp.h>')
                    'openmp'
                  elsif try_complie('#include <pthread.h>')
                    'pthreads'
