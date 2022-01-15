@@ -6,6 +6,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+/node_modules/
 
 /vendor/lib/
 /vendor/include/
@@ -17,6 +18,7 @@
 # rspec failure tracking
 .rspec_status
 
+*.lock
 *.bundle
 .ruby-version
 
