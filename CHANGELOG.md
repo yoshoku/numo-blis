@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+## [0.3.0] - 2022-01-30
+
+- Changed to use generic CPU type when installing on Apple M1 mac.
+- Fixed a typo on threading method detection process.
+- Introduced conventional commits.
+
 ## [0.2.0] - 2021-07-31
 
 - Added enable-threading option to specify the threding method of BLIS.
