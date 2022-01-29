@@ -33,6 +33,10 @@ Or install it yourself as:
 
     $ gem install numo-blis
 
+Note:
+Currently, when installing on Apple M1 mac, Numo::BLIS gives `generic` to the CPU type option of BLIS.
+It is possible that BLIS is not fully optimized and has low performance.
+
 ## Usage
 
 Numo::BLIS loads Numo::NArray and Numo::Linalg using BLIS as a background library.
