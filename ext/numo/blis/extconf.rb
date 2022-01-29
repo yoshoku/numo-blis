@@ -34,7 +34,7 @@ BLIS_THREADING = if ['openmp', 'pthreads', 'no'].include?(ENABLE_THREADING_ARG)
                    ENABLE_THREADING_ARG
                  elsif try_compile('#include <omp.h>')
                    'openmp'
-                 elsif try_complie('#include <pthread.h>')
+                 elsif try_compile('#include <pthread.h>')
                    'pthreads'
                  else
                    'no'
