@@ -23,7 +23,7 @@ void Init_blisext()
   mBLIS = rb_define_module_under(mNumo, "BLIS");
 
   /* The version of BLIS used as a background library. */
-  rb_define_const(mBLIS, "BLIS_VERSION", rb_str_new_cstr("0.8.1"));
+  rb_define_const(mBLIS, "BLIS_VERSION", rb_str_new_cstr("0.9.0"));
 
   /* The version of LAPACK used as a background library. */
   rb_define_const(mBLIS, "LAPACK_VERSION", rb_str_new_cstr("3.10.0"));
