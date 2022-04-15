@@ -1,4 +1,6 @@
-## [Unreleased]
+## [0.4.0] - 2022-04-15
+
+- Change the version of BLIS to be downloaded to 0.9.0.
 
 ## [0.3.0] - 2022-01-30
 
