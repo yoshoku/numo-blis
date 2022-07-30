@@ -16,15 +16,15 @@ module Numo
       # @!visibility private
       def load_blis(*dirs, exc: true)
         dirs.each do |d|
-          begin
-            f_blis = dlopen(Blas, 'libblis', d)
-            f_lapacke = dlopen(Lapack, 'liblapacke', d)
-            @@libs = [f_blis, f_lapacke].compact
-            return true
-          rescue
-          end
+          f_blis = dlopen(Blas, 'libblis', d)
+          f_lapacke = dlopen(Lapack, 'liblapacke', d)
+          @@libs = [f_blis, f_lapacke].compact # rubocop:disable Style/ClassVars
+          return true
+        rescue StandardError
+          # Suppress errors as well as loading methods in Numo::Linalg::Loader.
         end
         raise 'Failed to find BLIS/LAPACK library' if exc
+
         false
       end
     end
