@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Numo::BLIS do
-  it 'has version numbers' do
-    expect(Numo::BLIS::VERSION).not_to be nil
-    expect(Numo::BLIS::BLIS_VERSION).not_to be nil
-    expect(Numo::BLIS::LAPACK_VERSION).not_to be nil
+  it 'has version numbers', :aggregate_failures do
+    expect(Numo::BLIS::VERSION).not_to be_nil
+    expect(Numo::BLIS::BLIS_VERSION).not_to be_nil
+    expect(Numo::BLIS::LAPACK_VERSION).not_to be_nil
   end
 
-  it 'has library pathes' do
+  it 'has library pathes', :aggregate_failures do
     expect(Numo::Linalg::Loader.libs.size).to eq(2)
     expect(Numo::Linalg::Loader.libs).to include(include('libblis'))
     expect(Numo::Linalg::Loader.libs).to include(include('liblapacke'))
