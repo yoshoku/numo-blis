@@ -1,3 +1,7 @@
+## [0.4.1] - 2022-07-31
+
+- Refactor codes and configs with RuboCop.
+
 ## [0.4.0] - 2022-04-15
 
 - Change the version of BLIS to be downloaded to 0.9.0.
