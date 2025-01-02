@@ -19,13 +19,13 @@ SOEXT = RbConfig::CONFIG['SOEXT'] || case RbConfig::CONFIG['host_os']
                                        'so'
                                      end
 
-BLIS_VERSION = '0.9.0'
+BLIS_VERSION = '1.0'
 LAPACK_VERSION = '3.10.0'
 BLIS_URI = "https://github.com/flame/blis/archive/refs/tags/#{BLIS_VERSION}.tar.gz"
 LAPACK_URI = "https://github.com/Reference-LAPACK/lapack/archive/refs/tags/v#{LAPACK_VERSION}.tar.gz"
 BLIS_TGZ = "#{VENDOR_DIR}/tmp/blis-#{BLIS_VERSION}.tgz"
 LAPACK_TGZ = "#{VENDOR_DIR}/tmp/lapack-#{LAPACK_VERSION}.tgz"
-BLIS_KEY = 'c5ff9b0437edc1f93ad30fcdd633c0a276165b7e'
+BLIS_KEY = 'f0a89abd4169155e3ebe8d34d666419abe9da2c3'
 LAPACK_KEY = '4a9384523bf236c83568884e8c62d9517e41ac42'
 RB_CC = "'#{RbConfig::expand('$(CC)')}'"
 RB_CXX = "'#{RbConfig::expand('$(CPP)')}'"
