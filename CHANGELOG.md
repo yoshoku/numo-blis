@@ -1,3 +1,7 @@
+## [0.5.1] - 2025-01-03
+
+- Fix BLIS_VERSION and LAPACK_VERSION constants.
+
 ## [0.5.0] - 2025-01-03
 
 - Change the version of BLIS to be downloaded to 1.0.
