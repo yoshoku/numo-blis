@@ -8,7 +8,7 @@
 VALUE mNumo;
 VALUE mBLIS;
 
-void Init_blisext()
+RUBY_FUNC_EXPORTED void Init_blisext(void)
 {
   /**
   * Document-module: Numo
