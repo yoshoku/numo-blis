@@ -39,13 +39,12 @@ BLIS_THREADING = if ['openmp', 'pthreads', 'no'].include?(ENABLE_THREADING_ARG)
                  else
                    'no'
                  end
-BLIS_CPU = RbConfig::CONFIG['host_os'] =~ /darwin|mac os/i && RbConfig::CONFIG['host_cpu'] =~ /arm|aarch/i ? 'generic' : 'auto'
 BLIS_CONFIGURE_OPTIONS = ['--enable-cblas',
                           "--enable-threading=#{BLIS_THREADING}",
                           "--prefix=#{VENDOR_DIR}",
                           "CC=#{RB_CC}",
                           "CXX=#{RB_CXX}",
-                          "#{BLIS_CPU}"].join(' ')
+                          'auto'].join(' ')
 LAPACK_CMAKE_OPTIONS = ["-DBLAS_LIBRARIES='#{VENDOR_DIR}/lib/libblis.#{SOEXT}'",
                         '-DLAPACKE=ON',
                         '-DBUILD_SHARED_LIBS=ON',
