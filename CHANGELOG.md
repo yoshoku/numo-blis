@@ -1,3 +1,8 @@
+## [0.5.2] - 2025-04-28
+
+- Change the version of BLIS to be downloaded to 1.1.
+- Change to use automatic detection of CPU type on macOS.
+
 ## [0.5.1] - 2025-01-03
 
 - Fix BLIS_VERSION and LAPACK_VERSION constants.
