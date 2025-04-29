@@ -18,7 +18,7 @@ SOEXT = RbConfig::CONFIG['SOEXT'] || case RbConfig::CONFIG['host_os']
                                      else
                                        'so'
                                      end
-
+IS_WIN = SOEXT == 'dll'
 BLIS_VERSION = '1.1'
 LAPACK_VERSION = '3.11.0'
 BLIS_URI = "https://github.com/flame/blis/archive/refs/tags/#{BLIS_VERSION}.tar.gz"
@@ -39,13 +39,12 @@ BLIS_THREADING = if ['openmp', 'pthreads', 'no'].include?(ENABLE_THREADING_ARG)
                  else
                    'no'
                  end
-BLIS_CPU = RbConfig::CONFIG['host_os'] =~ /darwin|mac os/i && RbConfig::CONFIG['host_cpu'] =~ /arm|aarch/i ? 'generic' : 'auto'
 BLIS_CONFIGURE_OPTIONS = ['--enable-cblas',
                           "--enable-threading=#{BLIS_THREADING}",
                           "--prefix=#{VENDOR_DIR}",
                           "CC=#{RB_CC}",
                           "CXX=#{RB_CXX}",
-                          "#{BLIS_CPU}"].join(' ')
+                          'auto'].join(' ')
 LAPACK_CMAKE_OPTIONS = ["-DBLAS_LIBRARIES='#{VENDOR_DIR}/lib/libblis.#{SOEXT}'",
                         '-DLAPACKE=ON',
                         '-DBUILD_SHARED_LIBS=ON',
@@ -76,6 +75,13 @@ unless File.exist?("#{VENDOR_DIR}/installed_blis-#{BLIS_VERSION}")
     cfgstdout, _cfgstderr, cfgstatus = Open3.capture3("./configure #{BLIS_CONFIGURE_OPTIONS}")
     File.open("#{VENDOR_DIR}/tmp/blis.log", 'w') { |f| f.puts(cfgstdout) }
     abort('Failed to config BLIS.') unless cfgstatus.success?
+
+    # https://github.com/flame/blis/pull/867
+    unless IS_WIN
+      buff = File.read("#{VENDOR_DIR}/tmp/blis-#{BLIS_VERSION}/config.mk")
+      replaced = buff.gsub(/IS_WIN\s+:=\s+yes/, 'IS_WIN := no')
+      File.write("#{VENDOR_DIR}/tmp/blis-#{BLIS_VERSION}/config.mk", replaced)
+    end
 
     puts 'Building BLIS. This could take a while...'
     mkstdout, _mkstderr, mkstatus = Open3.capture3('make -j')
