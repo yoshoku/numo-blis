@@ -1,3 +1,7 @@
+## [0.5.3] - 2025-04-29
+
+- Revert "change to use automatic detection of CPU type on macOS".
+
 ## [0.5.2] - 2025-04-28
 
 - Change the version of BLIS to be downloaded to 1.1.
