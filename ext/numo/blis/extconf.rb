@@ -51,20 +51,6 @@ LAPACK_CMAKE_OPTIONS = ["-DBLAS_LIBRARIES='#{VENDOR_DIR}/lib/libblis.#{SOEXT}'",
                         '-DCMAKE_BUILD_TYPE=Release',
                         "-DCMAKE_INSTALL_PREFIX='#{VENDOR_DIR}'"].join(' ')
 
-IS_CMAKE4_LATER = proc do
-  cmkstdout, _cmkstderr, cmkstatus = Open3.capture3('cmake --version')
-  return false unless cmkstatus.success?
-
-  version = cmkstdout.split.select { |str| Gem::Version.correct?(str) }.first
-  return false unless version
-
-  return false if Gem::Version.new(version) < Gem::Version.new('4.0.0')
-
-  true
-end.call
-
-CMAKE_POLICY = IS_CMAKE4_LATER ? 'CMAKE_POLICY_VERSION_MINIMUM=3.5 ' : ''
-
 unless File.exist?("#{VENDOR_DIR}/installed_blis-#{BLIS_VERSION}")
   puts "Downloading BLIS #{BLIS_VERSION}."
   URI.parse(BLIS_URI).open { |rf| File.open(BLIS_TGZ, 'wb') { |sf| sf.write(rf.read) } }
@@ -133,7 +119,7 @@ unless File.exist?("#{VENDOR_DIR}/installed_lapack-#{LAPACK_VERSION}")
   FileUtils.mkdir_p("#{VENDOR_DIR}/tmp/lapack-#{LAPACK_VERSION}/build")
   Dir.chdir("#{VENDOR_DIR}/tmp/lapack-#{LAPACK_VERSION}/build") do
     puts 'Configuring LAPACK.'
-    cmkstdout, _cmkstderr, cmkstatus = Open3.capture3("#{CMAKE_POLICY}cmake #{LAPACK_CMAKE_OPTIONS} ../")
+    cmkstdout, _cmkstderr, cmkstatus = Open3.capture3("CMAKE_POLICY_VERSION_MINIMUM=3.5 cmake #{LAPACK_CMAKE_OPTIONS} ../")
     File.open("#{VENDOR_DIR}/tmp/lapack.log", 'w') { |f| f.puts(cmkstdout) }
     abort('Failed to config LAPACK.') unless cmkstatus.success?
 
