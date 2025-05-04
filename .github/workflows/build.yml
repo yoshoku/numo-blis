@@ -50,3 +50,28 @@ jobs:
       run: |
         bundle exec rake compile
         bundle exec rake spec
+
+  build-win:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+    defaults:
+      run:
+        shell: msys2 {0}
+    name: Ruby 3.4 (Windows)
+    steps:
+    - uses: actions/checkout@v4
+    - uses: msys2/setup-msys2@v2
+      with:
+        msystem: UCRT64
+        update: true
+        install: git mingw-w64-x86_64-gcc mingw-w64-x86_64-gcc-fortran mingw-w64-x86_64-cmake
+    - name: Set up Ruby 3.4
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.4
+        bundler-cache: true
+    - name: Build and test with Rake
+      run: |
+        bundle exec rake compile
+        bundle exec rake spec

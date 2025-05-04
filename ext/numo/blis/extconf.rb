@@ -72,7 +72,10 @@ unless File.exist?("#{VENDOR_DIR}/installed_blis-#{BLIS_VERSION}")
 
   Dir.chdir("#{VENDOR_DIR}/tmp/blis-#{BLIS_VERSION}") do
     puts 'Configuring BLIS.'
+    puts "#{BLIS_CONFIGURE_OPTIONS}"
     cfgstdout, _cfgstderr, cfgstatus = Open3.capture3("./configure #{BLIS_CONFIGURE_OPTIONS}")
+    puts cfgstdout
+    puts _cfgstderr
     File.open("#{VENDOR_DIR}/tmp/blis.log", 'w') { |f| f.puts(cfgstdout) }
     abort('Failed to config BLIS.') unless cfgstatus.success?
 
