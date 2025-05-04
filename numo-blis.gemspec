@@ -40,6 +40,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_dependency 'fiddle', '~> 1.0'
   spec.add_dependency 'numo-linalg', '>= 0.1.4'
 
   # For more information and examples about making a new gem, checkout our
