@@ -5,6 +5,6 @@ module Numo
   # Numo::BLIS loads Numo::NArray and Linalg with BLIS used as backend library.
   module BLIS
     # The version of Numo::BLIS you install.
-    VERSION = '0.5.3'
+    VERSION = '0.5.4'
   end
 end

@@ -1,3 +1,9 @@
+## [[0.5.4](https://github.com/yoshoku/numo-blis/compare/v0.5.3...v0.5.4)] - 2025-05-04
+
+- Add fiddle gem to the runtime dependencies for Ruby 3.5 or later.
+- Change to use automatic detection of CPU type on macOS.
+- Fix build error on macOS with Apple silicon.
+
 ## [0.5.3] - 2025-04-29
 
 - Revert "change to use automatic detection of CPU type on macOS".
