@@ -20,3 +20,33 @@ jobs:
         bundler-cache: true
     - name: Build and test with Rake
       run: bundle exec rake
+
+  build-mac:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+    name: Ruby 3.4 (macOS)
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install gcc, gfortran, and cmake
+      run: |
+        brew install gcc gfortran cmake
+    - name: Create symlink for gfortran
+      run: |
+        SOURCE_PATH=$(ls -d /opt/homebrew/Cellar/gcc/*/bin/gfortran)
+        if [ -n "$SOURCE_PATH" ]; then
+          ln -s "$SOURCE_PATH" /opt/homebrew/bin/gfortran
+          ls -l /opt/homebrew/bin/gfortran
+        else
+          echo "gfortran executable not found."
+          exit 1
+        fi
+    - name: Set up Ruby 3.4
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.4
+        bundler-cache: true
+    - name: Build and test with Rake
+      run: |
+        bundle exec rake compile
+        bundle exec rake spec
