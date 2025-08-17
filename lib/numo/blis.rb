@@ -14,7 +14,7 @@ module Numo
       module_function
 
       # @!visibility private
-      def load_blis(*dirs, exc: true)
+      def load_blis(*dirs, exc: true) # rubocop:disable Naming/PredicateMethod
         dirs.each do |d|
           f_blis = dlopen(Blas, 'libblis', d)
           f_lapacke = dlopen(Lapack, 'liblapacke', d)
