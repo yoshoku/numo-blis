@@ -10,7 +10,7 @@ jobs:
       matrix:
         ruby: [ '3.2', '3.3', '3.4' ]
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Install gcc and gfortran
       run: sudo apt-get install -y gcc gfortran
     - name: Set up Ruby ${{ matrix.ruby }}
@@ -27,7 +27,7 @@ jobs:
       fail-fast: false
     name: Ruby 3.4 (macOS)
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Install gcc, gfortran, and cmake
       run: |
         brew install gcc gfortran cmake
