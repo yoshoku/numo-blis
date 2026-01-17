@@ -1,5 +1,7 @@
 # Numo::BLIS
 
+**This library is no longer actively maintained. Please consider migrating to [numo-linalg-alt](https://github.com/yoshoku/numo-linalg-alt).**
+
 [![Build Status](https://github.com/yoshoku/numo-blis/actions/workflows/build.yml/badge.svg)](https://github.com/yoshoku/numo-blis/actions/workflows/build.yml)
 [![Gem Version](https://badge.fury.io/rb/numo-blis.svg)](https://badge.fury.io/rb/numo-blis)
 [![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://github.com/yoshoku/numo-blis/blob/main/LICENSE.txt)
